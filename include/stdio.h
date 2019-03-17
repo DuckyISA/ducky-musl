@@ -51,6 +51,8 @@ extern "C" {
 #define TMP_MAX 10000
 #define L_tmpnam 20
 
+#ifndef __ASSEMBLER__
+
 typedef union _G_fpos64_t {
 	char __opaque[16];
 	long long __lldata;
@@ -61,9 +63,13 @@ extern FILE *const stdin;
 extern FILE *const stdout;
 extern FILE *const stderr;
 
+#endif  // #ifndef __ASSEMBLER__
+
 #define stdin  (stdin)
 #define stdout (stdout)
 #define stderr (stderr)
+
+#ifndef __ASSEMBLER__
 
 FILE *fopen(const char *__restrict, const char *__restrict);
 FILE *freopen(const char *__restrict, const char *__restrict, FILE *__restrict);
@@ -202,6 +208,8 @@ typedef struct _IO_cookie_io_functions_t {
 
 FILE *fopencookie(void *, const char *, cookie_io_functions_t);
 #endif
+
+#endif  // #ifndef __ASSEMBLER__
 
 #if defined(_LARGEFILE64_SOURCE) || defined(_GNU_SOURCE)
 #define tmpfile64 tmpfile

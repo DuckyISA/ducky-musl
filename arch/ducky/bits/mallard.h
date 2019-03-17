@@ -1,0 +1,69 @@
+#ifndef __ducky_board_mallard_h__
+#define __ducky_board_mallard_h__
+
+
+// Initial memory layout
+#define MALLARD_EVT_BASE        0x00000000
+// #define MALLARD_BOOT_CWT_ADDRESS       0x00000200
+// #define MALLARD_BOOT_PT_ADDRESS        0x00010000
+#define MALLARD_BOOTROM_BASE    0x00020000
+#define MALLARD_BOOTROM_SIZE    0x00040000
+
+#ifndef __ASSEMBLER__
+
+/*
+ * Interrupts
+ */
+enum {
+  IRQ_RTC = 0x00,
+  IRQ_UART = 0x01
+};
+
+#endif
+
+/*
+ * RTC
+ */
+#define RTC_DEFAULT_FREQ  100
+
+#define RTC_MMIO_ADDRESS  0x00008300
+
+#define RTC_MMIO_FREQ   0x00000000
+#define RTC_MMIO_SECOND 0x00000001
+#define RTC_MMIO_MINUTE 0x00000002
+#define RTC_MMIO_HOUR   0x00000004
+#define RTC_MMIO_DAY    0x00000005
+#define RTC_MMIO_MONTH  0x00000006
+#define RTC_MMIO_YEAR   0x00000006
+
+
+/*
+ * UART
+ */
+#define DUCKY_UART_BASE 0x00003080
+
+#ifndef __ASSEMBLER__
+
+enum {
+  DUCKY_UART_THR = 0x00,
+  DUCKY_UART_RBR = 0x00,
+  DUCKY_UART_LCR = 0x03,
+  DUCKY_UART_FCR = 0x02,
+  DUCKY_UART_MCR = 0x04,
+  DUCKY_UART_LSR = 0x05
+};
+
+enum {
+  DUCKY_UART_LSR_DATA_AVAIL = 0x01,
+  DUCKY_UART_LSR_OVERRUN = 0x02,
+  DUCKY_UART_LSR_PARITY = 0x04,
+  DUCKY_UART_LSR_FRAMING = 0x08,
+  DUCKY_UART_LSR_BREAK = 0x10,
+  DUCKY_UART_LSR_THR_EMPTY = 0x20,
+  DUCKY_UART_LSR_THR_IDLE = 0x40,
+  DUCKY_UART_LSR_FIFO = 0x80
+};
+
+#endif // !__ASSEMBLER__
+
+#endif // !__LIBDUCKY_BOARDS_MALLARD_H__
